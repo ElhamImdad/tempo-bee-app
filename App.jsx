@@ -6,7 +6,7 @@ import GetStarted from "./screens/getstarted/GetStarted";
 export default function App() {
   return (
     <TailwindProvider>
-      <View className="flex-1 items-center justify-center">
+      <View className="h-full">
         <GetStarted />
         <StatusBar />
       </View>
