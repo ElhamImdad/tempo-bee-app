@@ -16,7 +16,7 @@ export default function App() {
    
     <TailwindProvider>
        <NativeRouter>
-      <View className="h-full">
+      <View className="bg-primary h-full py-14 px-4">
         <Routes/>
         <StatusBar />
       </View>

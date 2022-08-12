@@ -8,11 +8,10 @@ export default function  GetStarted({history}) {
         alert('I am shop now button')
     }
     const joinUsHandler =()=>{
-        // alert('I am shop now button')
         history.push("/joinUs")
     }
     return ( 
-        <View className='bg-primary flex-1 items-center justify-center space-y-6'>
+        <View className='flex-1 items-center justify-center space-y-6'>
             <View><Image className='w-44 h-40' source={require('../../assets/logo.png')} /></View>
             <View><Button onClick={shopNowHandler}>تسوق الان</Button></View>
             <View><Button onClick={joinUsHandler}>انضم إلينا</Button></View>
