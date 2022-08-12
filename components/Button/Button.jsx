@@ -7,7 +7,7 @@ const Button = React.forwardRef(({ children, ...props }) => (
     className={cn("px-8 py-5 self-center rounded-md", {
       "bg-black": !props?.bgColor,
       "bg-primary": props.bgColor == "primary",
-    })}
+    }, )}
     onPress={props.onClick}
   >
     <Text
