@@ -26,6 +26,15 @@ function Icon(props) {
             />
           );
     }
+    case "search": {
+      return (
+          <FontAwesome
+            size={20}
+            style={{ margin: 5 }}
+            {...props}
+          />
+        );
+  }
 
     default: {
       return (
