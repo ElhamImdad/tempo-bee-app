@@ -22,6 +22,10 @@ module.exports = {
       },
       'black': '#000000',
       'white': '#FFFFFF',
+      'warning' : 'rgb(254, 211, 58)',
+      'success' : 'rgb(60, 213, 97)',
+      'danger' : 'rgb(255, 93, 132)',
+
     },
     extend: {},
   },

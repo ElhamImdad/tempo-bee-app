@@ -22,14 +22,14 @@ export default function JoinUs({ history }) {
           source={require("../../assets/logo.png")}
         />
       </View>
-      <View>
-        <Button onClick={loginHandler}>تسجيل الدخول إلى حسابي</Button>
+      <View className="w-4/5">
+        <Button onClick={signUpHandler} rounded='full' icon="plus-circle-outline">إنشاء حساب جديد</Button>
       </View>
-      <View>
-        <Button onClick={signUpHandler}>إنشاء حساب جديد</Button>
+      <View className="w-4/5">
+        <Button onClick={loginHandler} rounded="full" icon="user-circle-o">تسجيل الدخول إلى حسابي</Button>
       </View>
-      <View>
-        <Button onClick={continueAsGuestHandler}>اكمل الدخول كزائر</Button>
+      <View className="w-4/5">
+        <Button onClick={continueAsGuestHandler} rounded='full' icon="eye">اكمل الدخول كزائر</Button>
       </View>
     </View>
   );
