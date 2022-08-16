@@ -4,6 +4,10 @@ import { TailwindProvider } from "tailwindcss-react-native";
 import GetStarted from "./screens/getstarted/GetStarted";
 import Routes from "./routes/Routes";
 import { NativeRouter, Switch, Route } from "react-router-native";
+import {
+  NavigationContainer,
+  getFocusedRouteNameFromRoute
+} from "@react-navigation/native";
 
 export default function App() {
   I18nManager.forceRTL(true);
@@ -13,15 +17,15 @@ export default function App() {
     console.log(e);
   }
   return (
-   
+   <NavigationContainer>
     <TailwindProvider>
        <NativeRouter>
-      <View className="bg-primary h-full py-14 px-4">
+      <View className="bg-primary h-full ">
         <Routes/>
         <StatusBar />
       </View>
       </NativeRouter>
     </TailwindProvider>
-    
+    </NavigationContainer>
   );
 }

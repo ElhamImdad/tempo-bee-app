@@ -6,6 +6,7 @@ module.exports = {
            "./components/**/*.{js,jsx,ts,tsx}",
            "./router/**/*.{js,jsx,ts,tsx}",
            "./hooks/**/*.{js,jsx,ts,tsx}",
+           "./constants/**/*.{js,jsx,ts,tsx}",
           ],
   theme: {
     colors: {
@@ -15,9 +16,9 @@ module.exports = {
         dark: '#d49c01',
       },
       'gray': {
-        light: '#d3dce6',
-        DEFAULT: '#8492a6',
-        dark: '#0e1724',
+        light: '#eceff1',
+        DEFAULT: '#7a8c8e',
+        dark: '#263238',
       },
       'black': '#000000',
       'white': '#FFFFFF',

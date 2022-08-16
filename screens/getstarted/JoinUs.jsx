@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import Button from "../../components/Button/Button";
+import Button from "../../components/Button";
 
 export default function JoinUs({ history }) {
   const continueAsGuestHandler = () => {
-    history.push("/");
+    history.push("/home");
   };
   const loginHandler = () => {
     alert("I am a log in button");
