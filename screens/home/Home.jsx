@@ -1,13 +1,16 @@
-import { View, Image, TextInput, Text } from "react-native";
+import { View, Image, Text, TouchableOpacity  } from "react-native";
 import React from "react";
 import Button from "../../components/Button";
 import Input from "../../components/input";
 import { Formik } from "formik";
 import Card from "../../components/cards";
 
-export default function Home() {
+function Home({ navigation }) {
   const searchData = {
     searchInfo: "",
+  };
+  const cardHandler = () => {
+    navigation.navigate('restaurants');
   };
 
   return (
@@ -49,8 +52,17 @@ export default function Home() {
         </Formik>
       </View>
       <View className="w-full">
-        <Card>card content</Card>
+        <Text className="py-3 text-left">المطاعم</Text>
+        <TouchableOpacity onPress={cardHandler}>
+        <Card>
+          <Image
+            className="h-40 w-full"
+            source={require("../../assets/restaurants.jpg")}
+          />
+        </Card>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
+export default Home;
