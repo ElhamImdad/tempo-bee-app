@@ -20,6 +20,9 @@ module.exports = {
         DEFAULT: '#7a8c8e',
         dark: '#263238',
       },
+      'Neutral': {
+        light: '#D4D4D8',
+      },
       'black': '#000000',
       'white': '#FFFFFF',
       'warning' : 'rgb(254, 211, 58)',

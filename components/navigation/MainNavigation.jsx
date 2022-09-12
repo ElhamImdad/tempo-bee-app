@@ -11,7 +11,9 @@ import { MaterialCommunityIcons } from "../Icons/Icons";
 import Icon from "../Icons";
 import Home from "../../screens/home/Home";
 import Restaurants from "../../screens/home/Restaurants";
-import Profile from "../../screens/profile/Profile";
+import Profile from "../../screens/visitor/profile/Profile";
+// import PreviousOrders from "../../screens/client/orders/PreviousOrders";
+// import CurrentOrders from "../../screens/client/orders/CurrentOrders";
 import useColorScheme from "../../hooks/useColorScheme";
 import Colors from "../../constants/Colors";
 

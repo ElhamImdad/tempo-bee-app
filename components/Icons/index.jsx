@@ -1,5 +1,5 @@
 import React from "react";
-import { MaterialCommunityIcons, FontAwesome } from "./Icons";
+import { MaterialCommunityIcons, FontAwesome, Ionicons } from "./Icons";
 
 function Icon(props) {
   switch (props.name) {
@@ -7,6 +7,9 @@ function Icon(props) {
     case "notebook-edit-outline":
     case "car":
     case "face-woman-profile":
+    case "login":
+    case "arrow-left":
+    case "phone-plus":
     case "plus-circle-outline": {
       return (
         <MaterialCommunityIcons
@@ -25,26 +28,17 @@ function Icon(props) {
         />
       );
     }
+    case "person-add": {
+      return <Ionicons size={26} style={{ marginBottom: -3 }} {...props} />;
+    }
     case "eye":
     case "user-circle-o": {
-        return (
-            <FontAwesome
-              size={24}
-              style={{ marginBottom: -3 }}
-              {...props}
-            />
-          );
+      return <FontAwesome size={24} style={{ marginBottom: -3 }} {...props} />;
     }
     case "heart-o":
     case "search": {
-      return (
-          <FontAwesome
-            size={20}
-            style={{ margin: 5 }}
-            {...props}
-          />
-        );
-  }
+      return <FontAwesome size={20} style={{ margin: 5 }} {...props} />;
+    }
 
     default: {
       return (
