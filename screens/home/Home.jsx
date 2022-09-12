@@ -1,4 +1,4 @@
-import { View, Image, Text, TouchableOpacity  } from "react-native";
+import { View, Image, Text, TouchableOpacity, ScrollView  } from "react-native";
 import React from "react";
 import Button from "../../components/Button";
 import Input from "../../components/input";
@@ -14,6 +14,7 @@ function Home({ navigation }) {
   };
 
   return (
+    <ScrollView>
     <View className="flex-1 items-center space-y-6 px-3 py-9">
       <View>
         <Image
@@ -54,15 +55,16 @@ function Home({ navigation }) {
       <View className="w-full">
         <Text className="py-3 text-left">المطاعم</Text>
         <TouchableOpacity onPress={cardHandler}>
-        <Card>
+        <Card height={"h-40"}>
           <Image
-            className="h-40 w-full"
+            className="h-full w-full object-cover"
             source={require("../../assets/restaurants.jpg")}
           />
         </Card>
         </TouchableOpacity>
       </View>
     </View>
+    </ScrollView>
   );
 }
 export default Home;

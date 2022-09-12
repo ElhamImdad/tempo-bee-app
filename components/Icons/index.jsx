@@ -16,6 +16,15 @@ function Icon(props) {
         />
       );
     }
+    case "clock-time-three-outline": {
+      return (
+        <MaterialCommunityIcons
+          size={16}
+          style={{ marginBottom: -8 }}
+          {...props}
+        />
+      );
+    }
     case "eye":
     case "user-circle-o": {
         return (
@@ -26,6 +35,7 @@ function Icon(props) {
             />
           );
     }
+    case "heart-o":
     case "search": {
       return (
           <FontAwesome
