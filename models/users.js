@@ -1,5 +1,15 @@
 const pool = require("../config/bdd");
-const loginClient = async (request, response) => {};
+const loginClient = async (request, response) => {
+  let  tel= request.body.tel
+  let password = request.body.password 
+    pool.query('SELECT * FROM `client` where `trl` = ? and `password` = ? limit 1',[tel ], function (error, results, fields) {
+        if (error) {
+          response.status(500).json({message:"server error"}) 
+        }
+        else{
+        response.status(200).json({message:"success"}) 
+        }
+      })};
 
 const signUpClient = async (request, response) => {};
 
