@@ -1,5 +1,5 @@
-import { View, Text, ScrollView,  } from "react-native";
-import { ProgressBar } from 'react-native';
+import { View, Text, ScrollView } from "react-native";
+import { ProgressBar, MD3Colors } from "react-native-paper";
 import React from "react";
 import Card from "../../../components/cards";
 import Icon from "../../../components/Icons";
@@ -8,7 +8,7 @@ import Colors from "../../../constants/Colors";
 export default function CurrentOrders() {
   return (
     <ScrollView>
-      <View className="flex-1 p-5 space-y-6">
+      <View className="flex-1 p-5 space-y-7">
         <Card height={"min-h-fit"} border={"none"} padding="px-3.5 py-5">
           <View className="gap-3 flex flex-row flex-wrap h-screen w-screen">
             <View className="flex flex-1 items-start space-y-1">
@@ -64,14 +64,27 @@ export default function CurrentOrders() {
             </View>
           </Card>
         </Card>
-        <View className="items-center">
-          <Text>إلهام سوف تقوم بتوصيل طلبك</Text>
-        
-          <ProgressBar
-          color="rgb(121, 75, 196)"
-          progress={0.3}
-          trackColor="rgba(121, 75, 196, 0.3)"
-        />
+        <View className=" flex flex-1 items-center w-screen">
+          <Text className="font-bold text-sm">إلهام سوف تقوم بتوصيل طلبك</Text>
+          <View className="flex flex-row mt-7">
+            <Icon name="toolbox" color={Colors.primary}></Icon>
+            <View className="w-2/3 mt-3">
+              <ProgressBar
+                progress={0.5}
+                color={Colors.primary}
+                className="h-2"
+              />
+            </View>
+            <Icon name="location-on" color={Colors.secondary}></Icon>
+          </View>
+          <View className="mt-3 flex flex-row justify-between w-full">
+            <Text className="px-3">موقع الاستلام</Text>
+            <Text className="px-3">موقع التسليم</Text>
+          </View>
+          <View className="mt-7 space-y-2">
+            <Text className="font-bold text-sm">تواصل مع إلهام</Text>
+            <Text className="font-bold text-sm">05xxxxxxxx</Text>
+          </View>
         </View>
       </View>
     </ScrollView>

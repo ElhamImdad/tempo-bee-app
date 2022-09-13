@@ -10,6 +10,7 @@ function Icon(props) {
     case "login":
     case "arrow-left":
     case "phone-plus":
+    case "toolbox":
     case "plus-circle-outline": {
       return (
         <MaterialCommunityIcons
@@ -24,6 +25,15 @@ function Icon(props) {
       return (
         <MaterialCommunityIcons
           size={16}
+          style={{ marginBottom: -3 }}
+          {...props}
+        />
+      );
+    }
+    case "location-on": {
+      return (
+        <MaterialIcons
+          size={26}
           style={{ marginBottom: -3 }}
           {...props}
         />
