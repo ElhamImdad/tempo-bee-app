@@ -30,4 +30,5 @@ export default {
   white: '#FFFFFF',
   black: '#000000',
   golden: '#D29D2B',
+  transparent: 'transparent',
 };

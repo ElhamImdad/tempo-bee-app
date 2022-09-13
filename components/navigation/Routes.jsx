@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Router, Scene  } from 'react-native-router-flux';
-import GetStarted from '../../screens/getstarted/GetStarted';
-import JoinUs from '../../screens/getstarted/JoinUs';
+import GetStarted from '../../screens/shared/getstarted/GetStarted';
+import JoinUs from '../../screens/shared/getstarted/JoinUs';
 import {  Switch, Route } from "react-router-native";
 import Navigation from './MainNavigation';
 import Restaurants from '../../screens/home/Restaurants';

@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
@@ -11,6 +11,7 @@ import { MaterialCommunityIcons } from "../Icons/Icons";
 import Icon from "../Icons";
 import Home from "../../screens/home/Home";
 import Restaurants from "../../screens/home/Restaurants";
+import Foods from "../../screens/home/Foods";
 import Profile from "../../screens/visitor/profile/Profile";
 import PreviousOrders from "../../screens/client/orders/PreviousOrders";
 import CurrentOrders from "../../screens/client/orders/CurrentOrders";
@@ -39,10 +40,32 @@ function HomeStackScreen() {
         options={{
           title: "المطاعم",
           headerTintColor: Colors.primary,
+          headerBackTitleVisible: false,
           headerTitleStyle: {
             fontWeight: "bold",
           },
-        }}    
+        }}
+      />
+      <HomeStack.Screen
+        name="foods"
+        component={Foods}
+        options={{
+          headerTintColor: Colors.primary,
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: Colors.transparent
+          },
+          headerTitleStyle: {
+            color: Colors.transparent,
+          },
+          // headerRight: () => (
+          //   <Button
+          //     onPress={() => alert("This is a button!")}
+          //     title="Info"
+          //     color="#fff"
+          //   />
+          // ),
+        }}
       />
     </HomeStack.Navigator>
   );
@@ -52,14 +75,14 @@ function BottomTabNavigator() {
   const colorScheme = useColorScheme();
   return (
     <Tab.Navigator
-      initialRouteName="home"
+      initialRouteName="homeStack"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
         // headerShown: false,
       }}
     >
       <Tab.Screen
-        name="home"
+        name="homeStack"
         component={HomeStackScreen}
         options={{
           headerShown: false,

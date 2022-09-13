@@ -11,19 +11,19 @@ import Icon from "../../components/Icons";
 import Colors from "../../constants/Colors";
 import useColorScheme from "../../hooks/useColorScheme";
 
-export default function Restaurants() {
+export default function Restaurants({ navigation }) {
   const colorScheme = useColorScheme();
   const restaurantsCardHandler = () => {
-    alert("I am restaurants card");
+    navigation.navigate('foods');
   };
 
   return (
     <ScrollView>
-      <View className=" flex-1  space-y-6 p-5">
+      <View className=" flex-1 space-y-6 p-5">
         <TouchableHighlight onPress={restaurantsCardHandler}>
           <Card height={"h-52"} padding="pb-3">
             <Image
-              className="w-full h-3/4"
+              className="w-full h-3/4 rounded-t-lg"
               source={require("../../assets/restaurants.jpg")}
             />
             <View className="flex flex-row justify-between px-3">

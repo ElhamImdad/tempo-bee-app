@@ -28,7 +28,7 @@ module.exports = {
       'warning' : 'rgb(254, 211, 58)',
       'success' : 'rgb(60, 213, 97)',
       'danger' : 'rgb(255, 93, 132)',
-
+      'transparent': 'transparent',
     },
     extend: {},
   },

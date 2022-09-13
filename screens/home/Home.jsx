@@ -15,7 +15,7 @@ function Home({ navigation }) {
 
   return (
     <ScrollView>
-    <View className="flex-1 items-center space-y-6 px-3 py-9">
+    <View className="flex-1 items-center space-y-6 px-5 py-9 h-full">
       <View>
         <Image
           className="w-44 h-40"
@@ -57,7 +57,7 @@ function Home({ navigation }) {
         <TouchableOpacity onPress={cardHandler}>
         <Card height={"h-40"}>
           <Image
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover rounded-lg"
             source={require("../../assets/restaurants.jpg")}
           />
         </Card>

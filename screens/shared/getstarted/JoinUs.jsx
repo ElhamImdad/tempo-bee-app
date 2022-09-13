@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import Button from "../../components/Button";
+import Button from "../../../components/Button";
 
 export default function JoinUs({ history }) {
   const continueAsGuestHandler = () => {
@@ -19,7 +19,7 @@ export default function JoinUs({ history }) {
       <View>
         <Image
           className="w-44 h-40"
-          source={require("../../assets/logo.png")}
+          source={require("../../../assets/logo.png")}
         />
       </View>
       <View className="w-4/5">
