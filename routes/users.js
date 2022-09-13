@@ -1,11 +1,11 @@
 const express = require("express");
 const users = express.Router();
-const usersController = require("../controllers/users.js");
-const clientMiddleware = require("../midelwares/userVerification.js");
+const usersController = require("../controllers/users");
+const clientMiddleware = require("../midelwares/userVerification");
 
 users.post("/login/client", usersController.loginClient);
 users.post(
-  "/signup/client ",
+  "/signup/client",
   clientMiddleware.clientValidateRegister,
   usersController.signUpClient
 );

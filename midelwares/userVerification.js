@@ -2,7 +2,7 @@ const emailValidator = require("deep-email-validator");
 
 const clientValidateRegister = (req, res, next) => {
   // username min length 3
-  if (!req.body.name || req.body.name.length < 3) {
+  if (!req.body.nom || req.body.nom.length < 3) {
     return res.status(400).send({
       msg: "Please enter a name with min. 3 chars",
     });
@@ -17,11 +17,7 @@ const clientValidateRegister = (req, res, next) => {
       msg: "Please enter a phone number",
     });
   }
-  if (!req.body.name || req.body.name.length < 3) {
-    return res.status(400).send({
-      msg: "Please enter a name with min. 3 chars",
-    });
-  }
+
   if (!emailValidator.validate(req.body.email)) {
     return res.status(400).send({
       msg: "Please enter a valide email",
@@ -33,12 +29,13 @@ const clientValidateRegister = (req, res, next) => {
       msg: "Please enter a password with min. 6 chars",
     });
   }
-  // password (repeat) does not match
+
+  next();
 };
 
 const repValidateRegister = (req, res, next) => {
   // username min length 3
-  if (!req.body.name || req.body.name.length < 3) {
+  if (!req.body.nom || req.body.nom.length < 3) {
     return res.status(400).send({
       msg: "Please enter a name with min. 3 chars",
     });
@@ -53,11 +50,7 @@ const repValidateRegister = (req, res, next) => {
       msg: "Please enter a phone number",
     });
   }
-  if (!req.body.name || req.body.name.length < 3) {
-    return res.status(400).send({
-      msg: "Please enter a name with min. 3 chars",
-    });
-  }
+
   if (!emailValidator.validate(req.body.email)) {
     return res.status(400).send({
       msg: "Please enter a valide email",
@@ -81,5 +74,6 @@ const repValidateRegister = (req, res, next) => {
       msg: "Please enter a valide university number",
     });
   }
+  next();
 };
 module.exports = { clientValidateRegister, repValidateRegister };

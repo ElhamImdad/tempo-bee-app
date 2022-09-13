@@ -1,4 +1,5 @@
 const pool = require("../config/bdd");
+const bcrypt = require("bcrypt");
 const loginClient = async (request, response) => {
   let tel = request.body.tel;
   let password = request.body.password;
@@ -15,7 +16,7 @@ const loginClient = async (request, response) => {
   );
 };
 
-const signUpClient = async (request, response) => {
+const signUpClient = async (req, res, next) => {
   pool.query(
     `SELECT * FROM client  WHERE LOWER(tel) = LOWER(${pool.escape(
       req.body.tel
@@ -35,17 +36,17 @@ const signUpClient = async (request, response) => {
           } else {
             // has hashed pw => add to database
             pool.query(
-              `INSERT INTO users (id, nom , prenom,latitude,longitude, adrress, tel,email,note,password) VALUES ('?', ${pool.escape(
-                req.body.name
+              `INSERT INTO client ( nom , prenom,latitude,longitude, tel,email,note,password) VALUES ( ${pool.escape(
+                req.body.nom
               )},${pool.escape(req.body.prenom)},${pool.escape(
                 req.body.latitude
-              )},${pool.escape(req.body.longitude)},'?',${pool.escape(
+              )},${pool.escape(req.body.longitude)},${pool.escape(
                 req.body.tel
               )},${pool.escape(req.body.email)},${0},
-               ${pool.escape(hash)}, now())`,
+               ${pool.escape(hash)})`,
               (err, result) => {
                 if (err) {
-                  throw new Error(e.message);
+                  throw new Error(err.message);
                   return res.status(400).send({
                     msg: err,
                   });

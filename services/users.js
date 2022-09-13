@@ -1,4 +1,4 @@
-const userModel = require("../models/users.js");
+const userModel = require("../models/users");
 const loginClient = async (request, response) => {
   try {
     await userModel.loginClient(request, response);
@@ -7,11 +7,11 @@ const loginClient = async (request, response) => {
   }
 };
 
-const signUpClient = async (request, response) => {
+const signUpClient = async (request, response, next) => {
   try {
     await userModel.signUpClient(request, response);
   } catch (e) {
-    console.log("hhhhhhhhhhh");
+    throw new Error(e.message);
   }
 };
 
