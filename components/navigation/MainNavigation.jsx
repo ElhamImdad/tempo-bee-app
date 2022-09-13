@@ -12,8 +12,8 @@ import Icon from "../Icons";
 import Home from "../../screens/home/Home";
 import Restaurants from "../../screens/home/Restaurants";
 import Profile from "../../screens/visitor/profile/Profile";
-// import PreviousOrders from "../../screens/client/orders/PreviousOrders";
-// import CurrentOrders from "../../screens/client/orders/CurrentOrders";
+import PreviousOrders from "../../screens/client/orders/PreviousOrders";
+import CurrentOrders from "../../screens/client/orders/CurrentOrders";
 import useColorScheme from "../../hooks/useColorScheme";
 import Colors from "../../constants/Colors";
 
@@ -38,7 +38,7 @@ function HomeStackScreen() {
         component={Restaurants}
         options={{
           title: "المطاعم",
-          headerTintColor: Colors.primaryDark,
+          headerTintColor: Colors.primary,
           headerTitleStyle: {
             fontWeight: "bold",
           },
@@ -55,22 +55,28 @@ function BottomTabNavigator() {
       initialRouteName="home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
-        headerShown: false,
+        // headerShown: false,
       }}
     >
       <Tab.Screen
         name="home"
         component={HomeStackScreen}
         options={{
+          headerShown: false,
           tabBarLabel: "الرئيسية",
           tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
         }}
       />
       <Tab.Screen
         name="MyOrdered"
-        component={Profile}
+        component={PreviousOrders}
         options={{
           title: "طلباتي",
+          headerTitle: "الطلبات السابقة",
+          headerTintColor: Colors.primary,
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
           tabBarIcon: ({ color }) => (
             <Icon name="notebook-edit-outline" color={color} />
           ),
@@ -78,9 +84,14 @@ function BottomTabNavigator() {
       />
       <Tab.Screen
         name="Delivery"
-        component={Profile}
+        component={CurrentOrders}
         options={{
           title: "توصيل",
+          headerTitle: "الطلبات الحالية",
+          headerTintColor: Colors.primary,
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
           tabBarIcon: ({ color }) => <Icon name="car" color={color} />,
         }}
       />
@@ -88,6 +99,7 @@ function BottomTabNavigator() {
         name="Profile"
         component={Profile}
         options={{
+          headerShown: false,
           title: "حسابي",
           tabBarIcon: ({ color }) => (
             <Icon name="face-woman-profile" color={color} />
