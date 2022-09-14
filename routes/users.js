@@ -25,7 +25,15 @@ users.post(
   usersController.signURepresantativet
 );
 users.post("/login/admin", usersController.loginAdmin);
-users.post("/getclient", usersController.getClientById);
-users.post("/getRepresantative", usersController.getRepresantativeById);
+users.post("/client/getclient", usersController.getClientById);
+users.post(
+  "/represantative/getrepresantative",
+  usersController.getRepresantativeById
+);
+users.post(
+  "/represantative/updateprofile",
+  usersController.updateProfileRepresantative
+);
+users.post("/client/updateprofile", usersController.updateProfileClient);
 
 module.exports = users;

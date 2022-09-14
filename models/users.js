@@ -95,9 +95,34 @@ const signURepresantativet = async (req, res, next) => {
                 msg: err,
               });
             }
-            return res.status(201).send({
-              msg: "Registered!",
-            });
+            pool.query(
+              `SELECT * FROM represantative  WHERE  tel = ${pool.escape(
+                req.body.tel
+              )};`,
+              (err, result) => {
+                if (result.length) {
+                  pool.query(
+                    `INSERT INTO working_times (id_rep, time) VALUES ?`,
+                    [req.body.times.map((time) => [result[0].id, time.time])],
+                    (err, result) => {
+                      if (err) {
+                        console.log("error: ", err);
+                        result(err, null);
+                        return;
+                      }
+                      console.log(res);
+                      return res.status(201).send({
+                        msg: "Registered!",
+                      });
+                    }
+                  );
+                } else {
+                  res.status(400).send({
+                    msg: "represantative not found",
+                  });
+                }
+              }
+            );
           }
         );
       }
@@ -107,13 +132,105 @@ const signURepresantativet = async (req, res, next) => {
 
 const loginAdmin = async (request, response) => {};
 
-const siignUpVerification = async (request, response) => {};
+const siignUpVerification = async (req, res) => {};
 
-const getClientById = async (request, response) => {};
+const getClientById = async (req, res) => {
+  pool.query(
+    `SELECT * FROM client  WHERE  id = ${pool.escape(req.body.id)};`,
+    (err, result) => {
+      if (result.length) {
+        return res.status(200).send({
+          client: result,
+        });
+      } else {
+        res.status(400).send({
+          msg: "client not found",
+        });
+      }
+    }
+  );
+};
 
-const getRepresantativeById = async (request, response) => {};
+const getRepresantativeById = async (req, res) => {
+  pool.query(
+    `SELECT * FROM represantative  WHERE  id = ${pool.escape(req.body.id)};`,
+    (err, result) => {
+      if (result.length) {
+        pool.query(
+          `SELECT * FROM working_times  WHERE  id_rep = ${result[0].id};`,
+          (err, resul) => {
+            if (resul.length) {
+              result[0]["times"] = resul;
+            }
+            return res.status(200).json({
+              rep: result,
+            });
+          }
+        );
+      } else {
+        res.status(400).send({
+          msg: "represantative not found",
+        });
+      }
+    }
+  );
+};
+const updateProfileRepresantative = async (req, res) => {
+  pool.query(
+    `
+UPDATE represantative 
+set 
+nom=${pool.escape(req.body.nom)}, 
+prenom =${pool.escape(req.body.prenom)}, 
+adress=${pool.escape(req.body.adress)},
+email=${pool.escape(req.body.email)},
+departement=${pool.escape(req.body.departement)},
+latitude=${pool.escape(req.body.latitude)},
+longitude=${pool.escape(req.body.longitude)}
 
+where id='${req.body.id}'`,
+    (err, result) => {
+      if (err) {
+        throw new Error(err.message);
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(201).send({
+        msg: "updated!",
+      });
+    }
+  );
+};
+const updateProfileClient = async (req, res) => {
+  pool.query(
+    `
+UPDATE client 
+set 
+nom=${pool.escape(req.body.nom)}, 
+prenom =${pool.escape(req.body.prenom)}, 
+adress=${pool.escape(req.body.adress)},
+email=${pool.escape(req.body.email)},
+
+latitude=${pool.escape(req.body.latitude)},
+longitude=${pool.escape(req.body.longitude)}
+
+where id='${req.body.id}'`,
+    (err, result) => {
+      if (err) {
+        throw new Error(err.message);
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(201).send({
+        msg: "updated!",
+      });
+    }
+  );
+};
 module.exports = {
+  updateProfileRepresantative,
   loginClient,
   signUpClient,
   getRepresantativeById,
@@ -122,4 +239,5 @@ module.exports = {
   loginAdmin,
   signURepresantativet,
   loginRepresantative,
+  updateProfileClient,
 };

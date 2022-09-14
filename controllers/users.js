@@ -67,8 +67,24 @@ const getRepresantativeById = async (request, response) => {
     console.log(e.message);
   }
 };
+const updateProfileRepresantative = async (request, response) => {
+  try {
+    await userService.updateProfileRepresantative(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+const updateProfileClient = async (request, response) => {
+  try {
+    await userService.updateProfileClient(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 
 module.exports = {
+  updateProfileClient,
+  updateProfileRepresantative,
   loginClient,
   signUpClient,
   getRepresantativeById,

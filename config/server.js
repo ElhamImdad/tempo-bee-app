@@ -8,7 +8,7 @@ const productsRoute = require("../routes/products");
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
-app.use("/auth", usersRoute);
+app.use("/", usersRoute);
 const port = process.env.Port || 5000;
 app.get("/", (req, res) => {
   res.send("App is working");
