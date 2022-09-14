@@ -10,13 +10,21 @@ users.post(
   usersController.signUpClient
 );
 users.post(
-  "/signup/verification ",
-  clientMiddleware.repValidateRegister,
+  "/signup/verification",
+
   usersController.signUpVerification
 );
-users.post("/login/represantative", usersController.loginRepresantative);
-users.post("/signup/Represantative ", usersController.signURepresantativet);
-users.post("/login/", usersController.loginAdmin);
+users.post(
+  "/login/represantative",
+
+  usersController.loginRepresantative
+);
+users.post(
+  "/signup/represantative",
+  clientMiddleware.repValidateRegister,
+  usersController.signURepresantativet
+);
+users.post("/login/admin", usersController.loginAdmin);
 users.post("/getclient", usersController.getClientById);
 users.post("/getRepresantative", usersController.getRepresantativeById);
 

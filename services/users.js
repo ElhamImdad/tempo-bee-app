@@ -23,7 +23,7 @@ const loginRepresantative = async (request, response) => {
   }
 };
 
-const signURepresantativet = async (request, response) => {
+const signURepresantativet = async (request, response, next) => {
   try {
     await userModel.signURepresantativet(request, response);
   } catch (e) {

@@ -3,7 +3,7 @@ const userService = require("../services/users");
  * call other imported services, or same service but different functions here if you need to
  */
 
-const loginClient = async (request, response, next) => {
+const loginClient = async (request, response) => {
   try {
     await userService.loginClient(request, response);
   } catch (e) {
@@ -28,7 +28,7 @@ const loginRepresantative = async (request, response) => {
   }
 };
 
-const signURepresantativet = async (request, response) => {
+const signURepresantativet = async (request, response, next) => {
   try {
     await userService.signURepresantativet(request, response);
   } catch (e) {
