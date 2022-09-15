@@ -34,6 +34,11 @@ users.post(
   "/represantative/updateprofile",
   usersController.updateProfileRepresantative
 );
+users.post("/represantative/updatetimes", usersController.updateWorkingTimes);
 users.post("/client/updateprofile", usersController.updateProfileClient);
-
+users.post(
+  "/represantative/addcomment",
+  usersController.addReprsantativeComment
+);
+users.post("/client/addcomment", usersController.addClientComment);
 module.exports = users;

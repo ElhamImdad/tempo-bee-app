@@ -81,8 +81,33 @@ const updateProfileClient = async (request, response) => {
     console.log(e.message);
   }
 };
+const updateWorkingTimes = async (request, response) => {
+  try {
+    await userService.updateWorkingTimes(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+const addReprsantativeComment = async (request, response) => {
+  try {
+    await userService.addRepresantativeComment(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+const addClientComment = async (request, response) => {
+  try {
+    await userService.addClientComment(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 
 module.exports = {
+  addClientComment,
+  addReprsantativeComment,
+  updateWorkingTimes,
   updateProfileClient,
   updateProfileRepresantative,
   loginClient,

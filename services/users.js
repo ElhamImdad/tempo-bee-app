@@ -76,7 +76,33 @@ const updateProfileClient = async (request, response) => {
     throw new Error(e.message);
   }
 };
+const updateWorkingTimes = async (request, response) => {
+  try {
+    await userModel.updateWorkingTimes(request, response);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+const addClientComment = async (request, response) => {
+  try {
+    await userModel.addClientComment(request, response);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const addRepresantativeComment = async (request, response) => {
+  try {
+    await userModel.addRepesantativeComment(request, response);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
 module.exports = {
+  addRepresantativeComment,
+  addClientComment,
+  updateWorkingTimes,
   updateProfileClient,
   updateProfileRepresantative,
   loginClient,

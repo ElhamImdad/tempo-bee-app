@@ -33,13 +33,13 @@ const signUpClient = async (req, res, next) => {
           } else { } */
 
         pool.query(
-          `INSERT INTO client ( nom , prenom,latitude,longitude, tel,email,note,adress) VALUES ( ${pool.escape(
+          `INSERT INTO client ( nom , prenom,latitude,longitude, tel,email,adress) VALUES ( ${pool.escape(
             req.body.nom
           )},${pool.escape(req.body.prenom)},${pool.escape(
             req.body.latitude
           )},${pool.escape(req.body.longitude)},${pool.escape(
             req.body.tel
-          )},${pool.escape(req.body.email)},${0},${pool.escape(req.body.adress)}
+          )},${pool.escape(req.body.email)},${pool.escape(req.body.adress)}
                )`,
           (err, result) => {
             if (err) {
@@ -77,13 +77,13 @@ const signURepresantativet = async (req, res, next) => {
           } else { } */
 
         pool.query(
-          `INSERT INTO represantative ( nom , prenom,latitude,longitude, tel,email,note,departement,univ_num,adress) VALUES ( ${pool.escape(
+          `INSERT INTO represantative ( nom , prenom,latitude,longitude, tel,email,departement,univ_num,adress) VALUES ( ${pool.escape(
             req.body.nom
           )},${pool.escape(req.body.prenom)},${pool.escape(
             req.body.latitude
           )},${pool.escape(req.body.longitude)},${pool.escape(
             req.body.tel
-          )},${pool.escape(req.body.email)},${0},${pool.escape(
+          )},${pool.escape(req.body.email)},${pool.escape(
             req.body.departement
           )},${pool.escape(req.body.univ_num)},${pool.escape(
             req.body.adress
@@ -215,7 +215,7 @@ email=${pool.escape(req.body.email)},
 latitude=${pool.escape(req.body.latitude)},
 longitude=${pool.escape(req.body.longitude)}
 
-where id='${req.body.id}'`,
+where id=${req.body.id}`,
     (err, result) => {
       if (err) {
         throw new Error(err.message);
@@ -229,7 +229,81 @@ where id='${req.body.id}'`,
     }
   );
 };
+
+const updateWorkingTimes = async (req, res) => {
+  pool.query(
+    `DELETE FROM working_times WHERE id_rep=${pool.escape(req.body.id_rep)}`,
+    (err, resul) => {
+      if (err) {
+        throw new Error(err.message);
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      pool.query(
+        `INSERT INTO working_times (id_rep, time) VALUES ?`,
+        [req.body.times.map((time) => [req.body.id_rep, time.time])],
+        (err, result) => {
+          if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+
+          return res.status(201).send({
+            msg: "working times updated!",
+          });
+        }
+      );
+    }
+  );
+};
+const addRepesantativeComment = async (req, res) => {
+  const note = req.body.note ? req.body.note : "-1";
+  const comment = req.body.comment ? req.body.comment : "";
+  pool.query(
+    `insert into comments (id_client,id_rep,comment,note,is_client) values (
+    ${pool.escape(req.body.id_client)},  ${pool.escape(
+      req.body.id_rep
+    )},  ${pool.escape(comment)},  ${pool.escape(note)}, "false")`,
+    (err, result) => {
+      if (err) {
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+
+      return res.status(201).send({
+        msg: "comment added!",
+      });
+    }
+  );
+};
+const addClientComment = async (req, res) => {
+  const comment = req.body.comment ? req.body.comment : "";
+  const note = req.body.note ? req.body.note : "-1";
+  pool.query(
+    `insert into comments (id_client,id_rep,comment,note,is_client) values (
+    ${pool.escape(req.body.id_client)},  ${pool.escape(
+      req.body.id_rep
+    )},  ${pool.escape(comment)},  ${pool.escape(note)}, "true")`,
+    (err, result) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      return res.status(201).send({
+        msg: "comment added!",
+      });
+    }
+  );
+};
 module.exports = {
+  addRepesantativeComment,
+  addClientComment,
+  updateWorkingTimes,
   updateProfileRepresantative,
   loginClient,
   signUpClient,
