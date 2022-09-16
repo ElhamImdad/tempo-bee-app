@@ -87,7 +87,7 @@ const addClientComment = async (request, response) => {
   try {
     await userModel.addClientComment(request, response);
   } catch (e) {
-    throw new Error(e.message);
+    ç_;
   }
 };
 
