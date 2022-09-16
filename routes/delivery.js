@@ -7,7 +7,7 @@ delivery.post(
   "/represantative/orders ",
   deliveryController.represantativeOrdes
 );
-delivery.post("/client/order ", deliveryController.order);
+delivery.post("/client/order", deliveryController.order);
 delivery.post("/represantative/order/accepte", deliveryController.accepteOrder);
 
 module.exports = delivery;

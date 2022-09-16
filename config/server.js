@@ -11,6 +11,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use("/", usersRoute);
 app.use("/products", productsRoute);
+app.use("/delivery", deliveryRoute);
+
 const port = process.env.Port || 5000;
 app.get("/", (req, res) => {
   res.send(functions.getAdress("51.507822,-0.076702"));
