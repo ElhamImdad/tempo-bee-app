@@ -35,7 +35,24 @@ const accepteOrder = async (request, response) => {
   }
 };
 
+const getEncoursOrders = async (request, response) => {
+  try {
+    await deliveryService.getEncoursOrders(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+const getOrderwithPriducts = async (request, response) => {
+  try {
+    await deliveryService.getOrderwithPriducts(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 module.exports = {
+  getOrderwithPriducts,
+  getEncoursOrders,
   clientOrders,
   represantativeOrdes,
   order,

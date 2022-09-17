@@ -9,5 +9,6 @@ delivery.post(
 );
 delivery.post("/client/order", deliveryController.order);
 delivery.post("/represantative/order/accepte", deliveryController.accepteOrder);
-
+delivery.get("/encoursorder", deliveryController.getEncoursOrders);
+delivery.post("/getdelivery", deliveryController.getOrderwithPriducts);
 module.exports = delivery;
