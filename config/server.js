@@ -7,6 +7,7 @@ const deliveryRoute = require("../routes/delivery");
 const productsRoute = require("../routes/products");
 const functions = require("../helpers/fonctions");
 app.use(cors());
+app.use(express.static("./public"));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use("/", usersRoute);
