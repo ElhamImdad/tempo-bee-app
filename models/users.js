@@ -33,7 +33,7 @@ const signUpClient = async (req, res, next) => {
           } else { } */
 
         pool.query(
-          `INSERT INTO client ( nom , prenom,latitude,longitude, tel,email,adress) VALUES ( ${pool.escape(
+          `INSERT INTO client (nom,prenom,latitude,longitude,tel,email,adress) VALUES ( ${pool.escape(
             req.body.nom
           )},${pool.escape(req.body.prenom)},${pool.escape(
             req.body.latitude
@@ -260,12 +260,15 @@ const updateWorkingTimes = async (req, res) => {
 };
 const addRepesantativeComment = async (req, res) => {
   const note = req.body.note ? req.body.note : "-1";
+  const note_shop = req.body.note_shop ? req.body.note_shop : "-1";
   const comment = req.body.comment ? req.body.comment : "";
   pool.query(
-    `insert into comments (id_client,id_rep,comment,note,is_client) values (
+    `insert into comments (id_client,id_rep,comment,note,is_client,id_shop,note_shop) values (
     ${pool.escape(req.body.id_client)},  ${pool.escape(
       req.body.id_rep
-    )},  ${pool.escape(comment)},  ${pool.escape(note)}, "false")`,
+    )},  ${pool.escape(comment)},  ${pool.escape(note)}, "false", ${pool.escape(
+      req.body.id_shop
+    )}, ${pool.escape(note_shop)})`,
     (err, result) => {
       if (err) {
         return res.status(400).send({
@@ -280,13 +283,16 @@ const addRepesantativeComment = async (req, res) => {
   );
 };
 const addClientComment = async (req, res) => {
+  const note_shop = req.body.note_shop ? req.body.note_shop : "-1";
   const comment = req.body.comment ? req.body.comment : "";
   const note = req.body.note ? req.body.note : "-1";
   pool.query(
-    `insert into comments (id_client,id_rep,comment,note,is_client) values (
+    `insert into comments (id_client,id_rep,comment,note,is_client,id_shop,note_shop) values (
     ${pool.escape(req.body.id_client)},  ${pool.escape(
       req.body.id_rep
-    )},  ${pool.escape(comment)},  ${pool.escape(note)}, "true")`,
+    )},  ${pool.escape(comment)},  ${pool.escape(note)}, "true",${pool.escape(
+      req.body.id_shop
+    )}, ${pool.escape(note_shop)})`,
     (err, result) => {
       if (err) {
         console.log("error: ", err);
@@ -300,7 +306,73 @@ const addClientComment = async (req, res) => {
     }
   );
 };
+const getRepresantativeNote = async (req, res) => {
+  pool.query(
+    `select * from comments where id_rep=? and isclient=?`,
+    [req.body.id_rep, "false"],
+    (err, result) => {
+      if (err) {
+        res.status(400).send({ msg: err });
+      } else {
+        let j = 0;
+        const note = 0;
+        for (let i = 0; i < result.length; i++) {
+          if (result[i].note > -1) {
+            note = note + result[i].note;
+            j = j + 1;
+          }
+        }
+        res.status(400).send({ note: note / j });
+      }
+    }
+  );
+};
+const getClientNote = async (req, res) => {
+  pool.query(
+    `select * from comments where id_client=? and isclient=?`,
+    [req.body.id_client, "true"],
+    (err, result) => {
+      if (err) {
+        res.status(400).send({ msg: err });
+      } else {
+        let j = 0;
+        const note = 0;
+        for (let i = 0; i < result.length; i++) {
+          if (result[i].note > -1) {
+            note = note + result[i].note;
+            j = j + 1;
+          }
+        }
+        res.status(400).send({ note: note / j });
+      }
+    }
+  );
+};
+const getShopNote = async (req, res) => {
+  pool.query(
+    `select * from comments where id_shop=? `,
+    [req.res.id_shop],
+    (err, result) => {
+      if (err) {
+        res.status(400).send({ msg: err });
+      } else {
+        let j = 0;
+        const note = 0;
+        for (let i = 0; i < result.length; i++) {
+          if (result[i].note_shop > -1) {
+            note = note + result[i].note_shop;
+            j = j + 1;
+          }
+        }
+        res.status(400).send({ note: note / j });
+      }
+    }
+  );
+};
 module.exports = {
+  getShopNote,
+  getClientNote,
+  getRepresantativeNote,
   addRepesantativeComment,
   addClientComment,
   updateWorkingTimes,

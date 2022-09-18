@@ -87,7 +87,7 @@ const addClientComment = async (request, response) => {
   try {
     await userModel.addClientComment(request, response);
   } catch (e) {
-    ç_;
+    throw new Error(e.message);
   }
 };
 
@@ -98,8 +98,33 @@ const addRepresantativeComment = async (request, response) => {
     throw new Error(e.message);
   }
 };
+const getShopNote = async (request, response) => {
+  try {
+    await userModel.getShopNote(request, response);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+const getClientNote = async (request, response) => {
+  try {
+    await userModel.getClientNote(request, response);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 
+const getRepresantativeNote = async (request, response) => {
+  try {
+    await userModel.getRepresantativeNote(request, response);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 module.exports = {
+  getShopNote,
+  getClientNote,
+  getRepresantativeNote,
+
   addRepresantativeComment,
   addClientComment,
   updateWorkingTimes,

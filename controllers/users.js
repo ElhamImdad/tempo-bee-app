@@ -103,8 +103,31 @@ const addClientComment = async (request, response) => {
     console.log(e.message);
   }
 };
-
+const getShopNote = async (request, response) => {
+  try {
+    await userService.getShopNote(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+const getClientNote = async (request, response) => {
+  try {
+    await userService.getClientNote(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+const getRepresantativeNote = async (request, response) => {
+  try {
+    await userService.getRepresantativeNote(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 module.exports = {
+  getShopNote,
+  getClientNote,
+  getRepresantativeNote,
   addClientComment,
   addReprsantativeComment,
   updateWorkingTimes,

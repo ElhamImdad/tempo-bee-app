@@ -71,20 +71,22 @@ const getOrderwithPriducts = (req, res) => {
 };
 const order = async (req, res) => {
   pool.query(
-    `INSERT INTO delivery (id_client,destination,payment_method,category,sub_category,shop,status) values(${pool.escape(
+    `INSERT INTO delivery (id_client,destination,payment_method,category,sub_category,shop,status,id_shop) values(${pool.escape(
       req.body.id_client
     )}, ${pool.escape(req.body.address)}, ${pool.escape(
       req.body.payment_method
     )}, ${pool.escape(req.body.categorie)}, ${pool.escape(
       req.body.sub_categorie
-    )}, ${pool.escape(req.body.shop)},'en cours')`,
+    )}, ${pool.escape(req.body.shop)},'en cours',${pool.escape(
+      req.body.id_shop
+    )},)`,
 
     (error, results) => {
       if (error) {
         res.status(500).json({ message: error });
       } else {
         pool.query(
-          `INSERT INTO delivery_products (id_delivery, product,quantite,price) VALUES ?`,
+          l`INSERT INTO delivery_products (id_delivery, product,quantite,price) VALUES ?`,
           [
             req.body.products.map((product) => [
               results.insertId,

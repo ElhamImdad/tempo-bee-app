@@ -41,4 +41,7 @@ users.post(
   usersController.addReprsantativeComment
 );
 users.post("/client/addcomment", usersController.addClientComment);
+users.post("/client/getnote", usersController.getClientNote);
+users.post("/represantative/getnote", usersController.getRepresantativeNote);
+users.post("/shop/getnote", usersController.getShopNote);
 module.exports = users;
