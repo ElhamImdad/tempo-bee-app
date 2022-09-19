@@ -10,9 +10,13 @@ users.post(
   usersController.signUpClient
 );
 users.post(
-  "/signup/verification",
+  "/client/signup/verification",
+  usersController.clientSignUpVerification
+);
+users.post(
+  "/represantative/signup/verification",
 
-  usersController.signUpVerification
+  usersController.RepresantativeSignUpVerification
 );
 users.post(
   "/login/represantative",

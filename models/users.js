@@ -1,16 +1,65 @@
 const pool = require("../config/bdd");
 const bcrypt = require("bcrypt");
-const loginClient = async (request, response) => {
-  let tel = request.body.tel;
-  let password = request.body.password;
+const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
+
+function randomNumber(length) {
+  return Math.floor(
+    Math.pow(10, length - 1) +
+      Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1)
+  );
+}
+const loginClient = async (req, res) => {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "ic_rouzzi@esi.dz",
+      pass: "jshbeuwpztmksvyp",
+    },
+  });
+
   pool.query(
-    "SELECT * FROM `client` where `trl` = ? and `password` = ? limit 1",
-    [tel],
-    function (error, results, fields) {
+    "SELECT * FROM `client` where email = ? ",
+    [req.body.email],
+    function (error, results) {
       if (error) {
-        response.status(500).json({ message: "server error" });
+        res.status(500).json({ message: "server error" });
       } else {
-        response.status(200).json({ message: "success" });
+        if (results.length) {
+          const val = randomNumber(5).toString();
+          console.log(val);
+          pool.query(
+            `insert into confirmation (email,code) values (${pool.escape(
+              req.body.email
+            )},${pool.escape(val)})`,
+            (err, results) => {
+              if (err) {
+                res.status(500).json({ message: err });
+              } else {
+                var mailOptions = {
+                  from: "ic_rouzzi@esi.dz",
+                  to: req.body.email,
+                  subject: "Confirmation email",
+
+                  html:
+                    "<p> <b>Hello dear client</b> <br>Here is the code to verify your email:" +
+                    val +
+                    "<p>",
+                };
+                transporter.sendMail(mailOptions, function (error, info) {
+                  console.log("hhhhhhh");
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log("Email sent: " + info.response);
+                  }
+                });
+              }
+            }
+          );
+        } else {
+          res.status(400).json({ message: "email not found" });
+        }
       }
     }
   );
@@ -58,7 +107,61 @@ const signUpClient = async (req, res, next) => {
   );
 };
 
-const loginRepresantative = async (req, res) => {};
+const loginRepresantative = async (req, res) => {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "ic_rouzzi@esi.dz",
+      pass: "jshbeuwpztmksvyp",
+    },
+  });
+
+  pool.query(
+    "SELECT * FROM `represantative` where email = ? and univ_num=?",
+    [req.body.email, req.body.univ_num],
+    function (error, results) {
+      if (error) {
+        res.status(500).json({ message: "server error" });
+      } else {
+        if (results.length) {
+          const val = randomNumber(5).toString();
+          console.log(val);
+          pool.query(
+            `insert into confirmation (email,code) values (${pool.escape(
+              req.body.email
+            )},${pool.escape(val)})`,
+            (err, results) => {
+              if (err) {
+                res.status(500).json({ message: err });
+              } else {
+                var mailOptions = {
+                  from: "ic_rouzzi@esi.dz",
+                  to: req.body.email,
+                  subject: "Confirmation email",
+
+                  html:
+                    "<p> <b>Hello dear represantative </b> <br>Here is the code to verify your email:" +
+                    val +
+                    "<p>",
+                };
+                transporter.sendMail(mailOptions, function (error, info) {
+                  console.log("hhhhhhh");
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log("Email sent: " + info.response);
+                  }
+                });
+              }
+            }
+          );
+        } else {
+          res.status(400).json({ message: "email not found" });
+        }
+      }
+    }
+  );
+};
 
 const signURepresantativet = async (req, res, next) => {
   pool.query(
@@ -132,8 +235,90 @@ const signURepresantativet = async (req, res, next) => {
 
 const loginAdmin = async (request, response) => {};
 
-const siignUpVerification = async (req, res) => {};
-
+const clientSignUpVerification = async (req, res) => {
+  pool.query(
+    `SELECT * FROM confirmation   WHERE  email= ${pool.escape(
+      req.body.email
+    )};`,
+    (err, result) => {
+      if (result.length) {
+        var code = result[0].code;
+        console.log(code);
+        if (code == req.body.code) {
+          pool.query(
+            `select * from client where email=${pool.escape(req.body.email)}`,
+            (err, result) => {
+              if (result.length) {
+                const token = jwt.sign(
+                  {
+                    username: result[0].name,
+                    userId: result[0].id,
+                  },
+                  "SECRETKEY",
+                  {
+                    expiresIn: "7d",
+                  }
+                );
+                return res.status(200).send({
+                  msg: "Logged in!",
+                  token,
+                  client: result,
+                });
+              }
+            }
+          );
+        } else {
+          res.status(400).send({
+            msg: "code does not match",
+          });
+        }
+      }
+    }
+  );
+};
+const represantativeSignUpVerification = async (req, res) => {
+  pool.query(
+    `SELECT * FROM confirmation   WHERE  email= ${pool.escape(
+      req.body.email
+    )};`,
+    (err, result) => {
+      if (result.length) {
+        var code = result[0].code;
+        console.log(code);
+        if (code == req.body.code) {
+          pool.query(
+            `select * from reoresantative where email=${pool.escape(
+              req.body.email
+            )}`,
+            (err, result) => {
+              if (result.length) {
+                const token = jwt.sign(
+                  {
+                    username: result[0].name,
+                    userId: result[0].id,
+                  },
+                  "SECRETKEY",
+                  {
+                    expiresIn: "7d",
+                  }
+                );
+                return res.status(200).send({
+                  msg: "Logged in!",
+                  token,
+                  rep: result,
+                });
+              }
+            }
+          );
+        } else {
+          res.status(400).send({
+            msg: "code does not match",
+          });
+        }
+      }
+    }
+  );
+};
 const getClientById = async (req, res) => {
   pool.query(
     `SELECT * FROM client  WHERE  id = ${pool.escape(req.body.id)};`,
@@ -370,6 +555,8 @@ const getShopNote = async (req, res) => {
   );
 };
 module.exports = {
+  clientSignUpVerification,
+
   getShopNote,
   getClientNote,
   getRepresantativeNote,
@@ -381,7 +568,8 @@ module.exports = {
   signUpClient,
   getRepresantativeById,
   getClientById,
-  siignUpVerification,
+
+  represantativeSignUpVerification,
   loginAdmin,
   signURepresantativet,
   loginRepresantative,

@@ -13,7 +13,6 @@ const loginClient = async (request, response) => {
 
 const signUpClient = async (request, response, next) => {
   try {
-    console.log("gggg");
     await userService.signUpClient(request, response);
   } catch (e) {
     console.log(e.message);
@@ -44,14 +43,20 @@ const loginAdmin = async (request, response) => {
   }
 };
 
-const signUpVerification = async (request, response) => {
+const clientSignUpVerification = async (request, response) => {
   try {
-    await userService.siignUpVerification(request, response);
+    await userService.clientSignUpVerification(request, response);
   } catch (e) {
     console.log(e.message);
   }
 };
-
+const RepresantativeSignUpVerification = async (request, response) => {
+  try {
+    await userService.represantativeSignUpVerification(request, response);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 const getClientById = async (request, response) => {
   try {
     await userService.getClientById(request, response);
@@ -125,6 +130,7 @@ const getRepresantativeNote = async (request, response) => {
   }
 };
 module.exports = {
+  RepresantativeSignUpVerification,
   getShopNote,
   getClientNote,
   getRepresantativeNote,
@@ -137,7 +143,7 @@ module.exports = {
   signUpClient,
   getRepresantativeById,
   getClientById,
-  signUpVerification,
+  clientSignUpVerification,
   loginAdmin,
   signURepresantativet,
   loginRepresantative,

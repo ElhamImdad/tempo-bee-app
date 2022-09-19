@@ -39,14 +39,20 @@ const loginAdmin = async (request, response) => {
   }
 };
 
-const siignUpVerification = async (request, response) => {
+const clientSignUpVerification = async (request, response) => {
   try {
-    await userModel.signUpVerification(request, response);
+    await userModel.clientSignUpVerification(request, response);
   } catch (e) {
     throw new Error(e.message);
   }
 };
-
+const represantativeSignUpVerification = async (request, response) => {
+  try {
+    await userModel.represantativeSignUpVerification(request, response);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 const getClientById = async (request, response) => {
   try {
     await userModel.getClientById(request, response);
@@ -124,7 +130,7 @@ module.exports = {
   getShopNote,
   getClientNote,
   getRepresantativeNote,
-
+  represantativeSignUpVerification,
   addRepresantativeComment,
   addClientComment,
   updateWorkingTimes,
@@ -134,7 +140,7 @@ module.exports = {
   signUpClient,
   getRepresantativeById,
   getClientById,
-  siignUpVerification,
+  clientSignUpVerification,
   loginAdmin,
   signURepresantativet,
   loginRepresantative,
