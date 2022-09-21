@@ -13,8 +13,8 @@ const loginClient = async (req, res) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "ic_rouzzi@esi.dz",
-      pass: "jshbeuwpztmksvyp",
+      user: "tempobee.confirmation@gmail.com",
+      pass: "jayczzzjwfzyawzu",
     },
   });
 
@@ -26,6 +26,7 @@ const loginClient = async (req, res) => {
         res.status(500).json({ message: "server error" });
       } else {
         if (results.length) {
+          const nom = results[0].nom;
           const val = randomNumber(5).toString();
           console.log(val);
           pool.query(
@@ -39,10 +40,12 @@ const loginClient = async (req, res) => {
                 var mailOptions = {
                   from: "ic_rouzzi@esi.dz",
                   to: req.body.email,
-                  subject: "Confirmation email",
+                  subject: "تاكيد الايميل",
 
                   html:
-                    "<p> <b>Hello dear client</b> <br>Here is the code to verify your email:" +
+                    "<p> <b> tompobee في تطبيق " +
+                    nom +
+                    "مرحبا بك </b> <br>الرجاء ادخال الكود المرفق في التطبيق من اجل تاكيد حسابك:" +
                     val +
                     "<p>",
                 };
@@ -125,6 +128,7 @@ const loginRepresantative = async (req, res) => {
       } else {
         if (results.length) {
           const val = randomNumber(5).toString();
+          const name = results[0].nom;
           console.log(val);
           pool.query(
             `insert into confirmation (email,code) values (${pool.escape(
@@ -140,12 +144,13 @@ const loginRepresantative = async (req, res) => {
                   subject: "Confirmation email",
 
                   html:
-                    "<p> <b>Hello dear represantative </b> <br>Here is the code to verify your email:" +
+                    "<p> <b> tompobee في تطبيق " +
+                    nom +
+                    "مرحبا بك </b> <br>الرجاء ادخال الكود المرفق في التطبيق من اجل تاكيد حسابك:" +
                     val +
                     "<p>",
                 };
                 transporter.sendMail(mailOptions, function (error, info) {
-                  console.log("hhhhhhh");
                   if (error) {
                     console.log(error);
                   } else {
@@ -256,7 +261,7 @@ const clientSignUpVerification = async (req, res) => {
                   },
                   "SECRETKEY",
                   {
-                    expiresIn: "7d",
+                    expiresIn: "15d",
                   }
                 );
                 return res.status(200).send({
@@ -319,7 +324,7 @@ const represantativeSignUpVerification = async (req, res) => {
     }
   );
 };
-const getClientById = async (req, res) => {
+const getClientById = async (req, res, next) => {
   pool.query(
     `SELECT * FROM client  WHERE  id = ${pool.escape(req.body.id)};`,
     (err, result) => {
@@ -336,7 +341,7 @@ const getClientById = async (req, res) => {
   );
 };
 
-const getRepresantativeById = async (req, res) => {
+const getRepresantativeById = async (req, res, next) => {
   pool.query(
     `SELECT * FROM represantative  WHERE  id = ${pool.escape(req.body.id)};`,
     (err, result) => {
@@ -360,7 +365,7 @@ const getRepresantativeById = async (req, res) => {
     }
   );
 };
-const updateProfileRepresantative = async (req, res) => {
+const updateProfileRepresantative = async (req, res, next) => {
   pool.query(
     `
 UPDATE represantative 
@@ -387,7 +392,7 @@ where id='${req.body.id}'`,
     }
   );
 };
-const updateProfileClient = async (req, res) => {
+const updateProfileClient = async (req, res, next) => {
   pool.query(
     `
 UPDATE client 
@@ -415,7 +420,7 @@ where id=${req.body.id}`,
   );
 };
 
-const updateWorkingTimes = async (req, res) => {
+const updateWorkingTimes = async (req, res, next) => {
   pool.query(
     `DELETE FROM working_times WHERE id_rep=${pool.escape(req.body.id_rep)}`,
     (err, resul) => {
@@ -443,7 +448,7 @@ const updateWorkingTimes = async (req, res) => {
     }
   );
 };
-const addRepesantativeComment = async (req, res) => {
+const addRepesantativeComment = async (req, res, next) => {
   const note = req.body.note ? req.body.note : "-1";
   const note_shop = req.body.note_shop ? req.body.note_shop : "-1";
   const comment = req.body.comment ? req.body.comment : "";
@@ -467,7 +472,7 @@ const addRepesantativeComment = async (req, res) => {
     }
   );
 };
-const addClientComment = async (req, res) => {
+const addClientComment = async (req, res, next) => {
   const note_shop = req.body.note_shop ? req.body.note_shop : "-1";
   const comment = req.body.comment ? req.body.comment : "";
   const note = req.body.note ? req.body.note : "-1";
@@ -491,7 +496,7 @@ const addClientComment = async (req, res) => {
     }
   );
 };
-const getRepresantativeNote = async (req, res) => {
+const getRepresantativeNote = async (req, res, next) => {
   pool.query(
     `select * from comments where id_rep=? and isclient=?`,
     [req.body.id_rep, "false"],
@@ -512,7 +517,7 @@ const getRepresantativeNote = async (req, res) => {
     }
   );
 };
-const getClientNote = async (req, res) => {
+const getClientNote = async (req, res, next) => {
   pool.query(
     `select * from comments where id_client=? and isclient=?`,
     [req.body.id_client, "true"],

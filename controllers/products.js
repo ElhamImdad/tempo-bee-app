@@ -32,96 +32,96 @@ const getAllProducts = async (request, response) => {
     console.log(e.message);
   }
 };
-const addCategorie = async (request, response) => {
+const addCategorie = async (request, response, next) => {
   try {
-    await productsService.addCategorie(request, response);
+    await productsService.addCategorie(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const editCategorie = async (request, response) => {
+const editCategorie = async (request, response, next) => {
   try {
-    await productsService.editCategorie(request, response);
+    await productsService.editCategorie(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const deletCategorie = async (request, response) => {
+const deletCategorie = async (request, response, next) => {
   try {
-    await productsService.deletCategorie(request, response);
+    await productsService.deletCategorie(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const addSub_categorie = async (request, response) => {
+const addSub_categorie = async (request, response, next) => {
   try {
-    await productsService.addSub_categorie(request, response);
+    await productsService.addSub_categorie(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const editSub_categorie = async (request, response) => {
+const editSub_categorie = async (request, response, next) => {
   try {
-    await productsService.editSub_categorie(request, response);
+    await productsService.editSub_categorie(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const deletSub_categorie = async (request, response) => {
+const deletSub_categorie = async (request, response, next) => {
   try {
-    await productsService.deletSub_categorie(request, response);
+    await productsService.deletSub_categorie(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const addshop = async (request, response) => {
+const addshop = async (request, response, next) => {
   try {
-    await productsService.addshop(request, response);
+    await productsService.addshop(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const editshop = async (request, response) => {
+const editshop = async (request, response, next) => {
   try {
-    await productsService.editshop(request, response);
+    await productsService.editshop(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const deletshop = async (request, response) => {
+const deletshop = async (request, response, next) => {
   try {
-    await productsService.deletshop(request, response);
+    await productsService.deletshop(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
-const addproduct = async (request, response) => {
+const addproduct = async (request, response, next) => {
   try {
-    await productsService.addproduct(request, response);
-  } catch (e) {
-    console.log(e.message);
-  }
-};
-
-const editproduct = async (request, response) => {
-  try {
-    await productsService.editproduct(request, response);
+    await productsService.addproduct(request, response, next);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const deletproduct = async (request, response) => {
+const editproduct = async (request, response, next) => {
   try {
-    await productsService.deletproduct(request, response);
+    await productsService.editproduct(request, response, next);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+const deletproduct = async (request, response, next) => {
+  try {
+    await productsService.deletproduct(request, response, next);
   } catch (e) {
     console.log(e.message);
   }

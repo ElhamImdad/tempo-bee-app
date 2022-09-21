@@ -33,96 +33,96 @@ const getAllProducts = async (request, response) => {
   }
 };
 
-const addCategorie = async (request, response) => {
+const addCategorie = async (request, response, next) => {
   try {
-    await productsModel.addCategorie(request, response);
+    await productsModel.addCategorie(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const editCategorie = async (request, response) => {
+const editCategorie = async (request, response, next) => {
   try {
-    await productsModel.editCategorie(request, response);
+    await productsModel.editCategorie(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const deletCategorie = async (request, response) => {
+const deletCategorie = async (request, response, next) => {
   try {
-    await productsModel.deletCategorie(request, response);
+    await productsModel.deletCategorie(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const addSub_categorie = async (request, response) => {
+const addSub_categorie = async (request, response, next) => {
   try {
-    await productsModel.addSub_categorie(request, response);
+    await productsModel.addSub_categorie(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const editSub_categorie = async (request, response) => {
+const editSub_categorie = async (request, response, next) => {
   try {
-    await productsModel.editSub_categorie(request, response);
+    await productsModel.editSub_categorie(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const deletSub_categorie = async (request, response) => {
+const deletSub_categorie = async (request, response, next) => {
   try {
-    await productsModel.deletSub_categorie(request, response);
+    await productsModel.deletSub_categorie(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const addshop = async (request, response) => {
+const addshop = async (request, response, next) => {
   try {
-    await productsModel.addshop(request, response);
+    await productsModel.addshop(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const editshop = async (request, response) => {
+const editshop = async (request, response, next) => {
   try {
-    await productsModel.editshop(request, response);
+    await productsModel.editshop(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const deletshop = async (request, response) => {
+const deletshop = async (request, response, next) => {
   try {
-    await productsModel.deletshop(request, response);
+    await productsModel.deletshop(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
-const addproduct = async (request, response) => {
+const addproduct = async (request, response, next) => {
   try {
-    await productsModel.addproduct(request, response);
-  } catch (e) {
-    throw new Error(e.message);
-  }
-};
-
-const editproduct = async (request, response) => {
-  try {
-    await productsModel.editproduct(request, response);
+    await productsModel.addproduct(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const deletproduct = async (request, response) => {
+const editproduct = async (request, response, next) => {
   try {
-    await productsModel.deletproduct(request, response);
+    await productsModel.editproduct(request, response, next);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const deletproduct = async (request, response, next) => {
+  try {
+    await productsModel.deletproduct(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }

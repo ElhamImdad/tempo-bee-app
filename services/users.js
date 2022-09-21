@@ -9,7 +9,7 @@ const loginClient = async (request, response) => {
 
 const signUpClient = async (request, response, next) => {
   try {
-    await userModel.signUpClient(request, response);
+    await userModel.signUpClient(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
@@ -53,53 +53,53 @@ const represantativeSignUpVerification = async (request, response) => {
     throw new Error(e.message);
   }
 };
-const getClientById = async (request, response) => {
+const getClientById = async (request, response, next) => {
   try {
-    await userModel.getClientById(request, response);
+    await userModel.getClientById(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const getRepresantativeById = async (request, response) => {
+const getRepresantativeById = async (request, response, next) => {
   try {
-    await userModel.getRepresantativeById(request, response);
+    await userModel.getRepresantativeById(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
-const updateProfileRepresantative = async (request, response) => {
+const updateProfileRepresantative = async (request, response, next) => {
   try {
-    await userModel.updateProfileRepresantative(request, response);
+    await userModel.updateProfileRepresantative(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
-const updateProfileClient = async (request, response) => {
+const updateProfileClient = async (request, response, next) => {
   try {
-    await userModel.updateProfileClient(request, response);
+    await userModel.updateProfileClient(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
-const updateWorkingTimes = async (request, response) => {
+const updateWorkingTimes = async (request, response, next) => {
   try {
-    await userModel.updateWorkingTimes(request, response);
+    await userModel.updateWorkingTimes(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
-const addClientComment = async (request, response) => {
+const addClientComment = async (request, response, next) => {
   try {
-    await userModel.addClientComment(request, response);
+    await userModel.addClientComment(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const addRepresantativeComment = async (request, response) => {
+const addRepresantativeComment = async (request, response, next) => {
   try {
-    await userModel.addRepesantativeComment(request, response);
+    await userModel.addRepesantativeComment(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
@@ -111,17 +111,17 @@ const getShopNote = async (request, response) => {
     throw new Error(e.message);
   }
 };
-const getClientNote = async (request, response) => {
+const getClientNote = async (request, response, next) => {
   try {
-    await userModel.getClientNote(request, response);
+    await userModel.getClientNote(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const getRepresantativeNote = async (request, response) => {
+const getRepresantativeNote = async (request, response, next) => {
   try {
-    await userModel.getRepresantativeNote(request, response);
+    await userModel.getRepresantativeNote(request, response, next);
   } catch (e) {
     throw new Error(e.message);
   }

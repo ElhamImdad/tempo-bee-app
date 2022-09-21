@@ -1,5 +1,5 @@
 const pool = require("../config/bdd");
-const clientOrders = async (request, response) => {
+const clientOrders = async (request, response, next) => {
   let id = request.body.id;
 
   pool.query(
@@ -15,7 +15,7 @@ const clientOrders = async (request, response) => {
   );
 };
 
-const represantativeOrdes = async (request, response) => {
+const represantativeOrdes = async (request, response, next) => {
   let id = request.body.id;
 
   pool.query(
@@ -45,7 +45,7 @@ const getEncoursOrders = async (req, res) => {
     }
   );
 };
-const getOrderwithPriducts = (req, res) => {
+const getOrderwithPriducts = async (req, res, next) => {
   let id = req.body.id;
 
   pool.query(
@@ -69,7 +69,7 @@ const getOrderwithPriducts = (req, res) => {
     }
   );
 };
-const order = async (req, res) => {
+const order = async (req, res, next) => {
   pool.query(
     `INSERT INTO delivery (id_client,destination,payment_method,category,sub_category,shop,status,id_shop) values(${pool.escape(
       req.body.id_client
@@ -108,7 +108,7 @@ const order = async (req, res) => {
   );
 };
 
-const accepteOrder = async (req, res) => {
+const accepteOrder = async (req, res, next) => {
   let id = req.body.id;
   pool.query(
     "select * FROM `delivery`  where status=? and  id = ?  ",
@@ -138,8 +138,21 @@ const accepteOrder = async (req, res) => {
     }
   );
 };
-
+const search = async (req, res) => {
+  pool.query(
+    `select * from shop where name like ?`,
+    ["%" + req.body.shop + "%"],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({ message: err });
+      } else {
+        res.status(200).json({ shops: result });
+      }
+    }
+  );
+};
 module.exports = {
+  search,
   getOrderwithPriducts,
   clientOrders,
   represantativeOrdes,

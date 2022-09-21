@@ -38,7 +38,7 @@ const getAllProducts = async (req, res) => {
   );
 };
 
-const addCategorie = async (req, res) => {
+const addCategorie = async (req, res, next) => {
   const url = "image.png";
 
   pool.query(
@@ -52,7 +52,7 @@ const addCategorie = async (req, res) => {
   );
 };
 
-const editCategorie = async (req, res) => {
+const editCategorie = async (req, res, next) => {
   const url = "image.png";
 
   pool.query(
@@ -67,7 +67,7 @@ const editCategorie = async (req, res) => {
   );
 };
 
-const deletCategorie = async (req, res) => {
+const deletCategorie = async (req, res, next) => {
   pool.query(
     `DELETE FROM categorie WHERE id=${pool.escape(req.body.id)}`,
     (err, resutl) => {
@@ -77,7 +77,7 @@ const deletCategorie = async (req, res) => {
   );
 };
 
-const addSub_categorie = async (req, res) => {
+const addSub_categorie = async (req, res, next) => {
   const url = "image.png";
 
   pool.query(
@@ -91,7 +91,7 @@ const addSub_categorie = async (req, res) => {
   );
 };
 
-const editSub_categorie = async (req, res) => {
+const editSub_categorie = async (req, res, next) => {
   const url = "image.png";
 
   pool.query(
@@ -106,7 +106,7 @@ const editSub_categorie = async (req, res) => {
   );
 };
 
-const deletSub_categorie = async (req, res) => {
+const deletSub_categorie = async (req, res, next) => {
   const id = req.body.id_categorie ? req.body.id_categorie : req.body.id;
   pool.query(
     `DELETE FROM sub_categorie WHERE id=${pool.escape(id)}`,
@@ -117,7 +117,7 @@ const deletSub_categorie = async (req, res) => {
   );
 };
 
-const addshop = async (req, res) => {
+const addshop = async (req, res, next) => {
   const url = "image.png";
   pool.query(
     `INSERT INTO  shop  (name,image,id_sub_categorie,longitude,latitude,adresse,delivery_time,delivery_price,min_price) VALUES (${pool.escape(
@@ -138,7 +138,7 @@ const addshop = async (req, res) => {
   );
 };
 
-const editshop = async (req, res) => {
+const editshop = async (req, res, next) => {
   const url = "image.png";
   pool.query(
     ` update   shop  set  
@@ -158,7 +158,7 @@ const editshop = async (req, res) => {
   );
 };
 
-const deletshop = async (req, res) => {
+const deletshop = async (req, res, next) => {
   const id = req.body.id_sub_categorie
     ? req.body.id_sub_categorie
     : req.body.id;
@@ -167,7 +167,7 @@ const deletshop = async (req, res) => {
     else res.status(200).send({ msg: "shop deleted " });
   });
 };
-const addproduct = async (req, res) => {
+const addproduct = async (req, res, next) => {
   const url = "image.png";
 
   pool.query(
@@ -234,7 +234,7 @@ const addproduct = async (req, res) => {
   );
 };
 
-const editproduct = async (req, res) => {
+const editproduct = async (req, res, next) => {
   const url = "image.png";
 
   pool.query(
@@ -250,7 +250,7 @@ const editproduct = async (req, res) => {
   );
 };
 
-const deletproduct = async (req, res) => {
+const deletproduct = async (req, res, next) => {
   const id = req.body.shop ? req.body.shop : req.body.id;
   pool.query(
     `DELETE FROM product WHERE id=${pool.escape(id)}`,
